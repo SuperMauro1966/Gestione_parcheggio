@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.6.13-MariaDB - mariadb.org binary distribution
+-- Versione server:              11.3.0-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            12.3.0.6589
 -- --------------------------------------------------------
@@ -148,10 +148,13 @@ CREATE TABLE IF NOT EXISTS `tipologia` (
   `Tipo` varchar(20) NOT NULL,
   PRIMARY KEY (`IDTipologia`),
   KEY `IDTipologia` (`IDTipologia`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le tipologie dei veicoli \r\n';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le tipologie dei veicoli \r\n';
 
 -- Dump dei dati della tabella db_parcheggio.tipologia: ~0 rows (circa)
 DELETE FROM `tipologia`;
+INSERT INTO `tipologia` (`IDTipologia`, `Tipo`) VALUES
+	(1, 'moto'),
+	(2, 'smartcar');
 
 -- Dump della struttura di tabella db_parcheggio.veicolo
 DROP TABLE IF EXISTS `veicolo`;
