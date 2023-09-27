@@ -147,12 +147,15 @@ CREATE TABLE IF NOT EXISTS `tipologia` (
   `IDTipologia` int(11) NOT NULL AUTO_INCREMENT,
   `Tipo` varchar(20) NOT NULL,
   PRIMARY KEY (`IDTipologia`),
+  UNIQUE KEY `IDX_tipologia_Tipo` (`Tipo`),
   KEY `IDTipologia` (`IDTipologia`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le tipologie dei veicoli \r\n';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le tipologie dei veicoli \r\n';
 
--- Dump dei dati della tabella db_parcheggio.tipologia: ~0 rows (circa)
+-- Dump dei dati della tabella db_parcheggio.tipologia: ~4 rows (circa)
 DELETE FROM `tipologia`;
 INSERT INTO `tipologia` (`IDTipologia`, `Tipo`) VALUES
+	(5, 'autovettura'),
+	(6, 'camper'),
 	(1, 'moto'),
 	(2, 'smartcar');
 
@@ -167,10 +170,14 @@ CREATE TABLE IF NOT EXISTS `veicolo` (
   UNIQUE KEY `IDX_Veicolo_Targa` (`Targa`),
   KEY `FK_Veicolo_Tipologia` (`IDTipologia`),
   CONSTRAINT `FK_Veicolo_Tipologia` FOREIGN KEY (`IDTipologia`) REFERENCES `tipologia` (`IDTipologia`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='autovetture che hanno parcheggiato almenon una volta in uno o più parcheggi ';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='autovetture che hanno parcheggiato almenon una volta in uno o più parcheggi ';
 
--- Dump dei dati della tabella db_parcheggio.veicolo: ~0 rows (circa)
+-- Dump dei dati della tabella db_parcheggio.veicolo: ~3 rows (circa)
 DELETE FROM `veicolo`;
+INSERT INTO `veicolo` (`IDVeicolo`, `Targa`, `AlimentazioneGpl`, `IDTipologia`) VALUES
+	(1, 'ff673cx', 0, 5),
+	(3, 'cb873cx', 1, 5),
+	(4, 'df12679', 0, 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
