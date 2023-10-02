@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS `contiene` (
   CONSTRAINT `FK_contiene_Parcheggio` FOREIGN KEY (`IDParcheggio`) REFERENCES `parcheggio` (`IDParcheggio`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='specifica quante piazzole case contiene il parcheggio ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.contiene: ~0 rows (circa)
+DELETE FROM `contiene`;
 
 -- Dump della struttura di tabella db_parcheggio.gestore
 DROP TABLE IF EXISTS `gestore`;
@@ -41,11 +42,16 @@ CREATE TABLE IF NOT EXISTS `gestore` (
   `IDGestore` int(11) NOT NULL AUTO_INCREMENT,
   `RagioneSociale` varchar(60) NOT NULL,
   `PartitaIva` char(11) NOT NULL,
+  `attivo` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`IDGestore`),
   UNIQUE KEY `IDX_Gestore_PartitaIva` (`PartitaIva`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='comprede i dati identificativi dei dati del gestore del parcheggio ';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='comprede i dati identificativi dei dati del gestore del parcheggio ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.gestore: ~3 rows (circa)
+DELETE FROM `gestore`;
+INSERT INTO `gestore` (`IDGestore`, `RagioneSociale`, `PartitaIva`, `attivo`) VALUES
+	(1, 'Frassineti2parking', '12334444555', 0),
+	(6, 'Frate4ww', '465677887', 1);
 
 -- Dump della struttura di tabella db_parcheggio.occupa
 DROP TABLE IF EXISTS `occupa`;
@@ -60,7 +66,8 @@ CREATE TABLE IF NOT EXISTS `occupa` (
   CONSTRAINT `FK_occupa_Tipologia` FOREIGN KEY (`IDTipologia`) REFERENCES `tipologia` (`IDTipologia`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='piazzole occupate da un dato tipo di veicolo ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.occupa: ~0 rows (circa)
+DELETE FROM `occupa`;
 
 -- Dump della struttura di tabella db_parcheggio.parcheggio
 DROP TABLE IF EXISTS `parcheggio`;
@@ -72,7 +79,8 @@ CREATE TABLE IF NOT EXISTS `parcheggio` (
   UNIQUE KEY `IDX_Parcheggio_Denominazione` (`Denominazione`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='gestisce tutte le informazioni riguardanti la capacità dei parcheggi , posti liberi e la denominazione del parcheggio ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.parcheggio: ~0 rows (circa)
+DELETE FROM `parcheggio`;
 
 -- Dump della struttura di tabella db_parcheggio.piazzolebase
 DROP TABLE IF EXISTS `piazzolebase`;
@@ -83,7 +91,8 @@ CREATE TABLE IF NOT EXISTS `piazzolebase` (
   UNIQUE KEY `IDX_PostiBase_TipoPiazzola:` (`TipoPiazzola:`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='specifica il tipo di piazzola e i posti totali disponibili ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.piazzolebase: ~0 rows (circa)
+DELETE FROM `piazzolebase`;
 
 -- Dump della struttura di tabella db_parcheggio.possiede
 DROP TABLE IF EXISTS `possiede`;
@@ -97,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `possiede` (
   CONSTRAINT `FK_possiede_parcehggio` FOREIGN KEY (`IDParcehggio`) REFERENCES `parcheggio` (`IDParcheggio`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='indica quanti parcheggi possiede il gestore ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.possiede: ~0 rows (circa)
+DELETE FROM `possiede`;
 
 -- Dump della struttura di tabella db_parcheggio.postiliberi
 DROP TABLE IF EXISTS `postiliberi`;
@@ -112,7 +122,8 @@ CREATE TABLE IF NOT EXISTS `postiliberi` (
   CONSTRAINT `FKpostiliberi_parcheggio` FOREIGN KEY (`IDParcehggio`) REFERENCES `parcheggio` (`IDParcheggio`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='mostra i posti liberi nelle piazzole del parcheggio ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.postiliberi: ~0 rows (circa)
+DELETE FROM `postiliberi`;
 
 -- Dump della struttura di tabella db_parcheggio.ticket
 DROP TABLE IF EXISTS `ticket`;
@@ -120,8 +131,8 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `IDTicket` int(11) NOT NULL AUTO_INCREMENT,
   `Importo` decimal(10,2) DEFAULT NULL,
   `OrarioEntrata` datetime NOT NULL,
-  `OrarioUscita` datetime NOT NULL,
-  `Ricevuta` tinyint(4) NOT NULL,
+  `OrarioUscita` datetime DEFAULT NULL,
+  `Ricevuta` tinyint(4) DEFAULT NULL,
   `IDVeicolo` int(11) NOT NULL,
   `IDGestore` int(11) NOT NULL,
   PRIMARY KEY (`IDTicket`) USING BTREE,
@@ -129,9 +140,15 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   KEY `FK_Tciket_IDGestore` (`IDGestore`) USING BTREE,
   CONSTRAINT `FK_Ticket_IDGestore` FOREIGN KEY (`IDGestore`) REFERENCES `gestore` (`IDGestore`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Ticket_veicolo` FOREIGN KEY (`IDVeicolo`) REFERENCES `veicolo` (`IDVeicolo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le informazioni riguardanti l''importo, gli orari e la rieveuta del veicolo ';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le informazioni riguardanti l''importo, gli orari e la rieveuta del veicolo ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.ticket: ~4 rows (circa)
+DELETE FROM `ticket`;
+INSERT INTO `ticket` (`IDTicket`, `Importo`, `OrarioEntrata`, `OrarioUscita`, `Ricevuta`, `IDVeicolo`, `IDGestore`) VALUES
+	(1, NULL, '2023-09-29 12:11:59', NULL, NULL, 1, 1),
+	(2, NULL, '2023-09-29 12:12:25', NULL, NULL, 1, 1),
+	(3, NULL, '2023-09-29 12:14:53', NULL, NULL, 1, 1),
+	(4, NULL, '2023-09-29 12:17:52', NULL, NULL, 1, 6);
 
 -- Dump della struttura di tabella db_parcheggio.tipologia
 DROP TABLE IF EXISTS `tipologia`;
@@ -143,7 +160,13 @@ CREATE TABLE IF NOT EXISTS `tipologia` (
   KEY `IDTipologia` (`IDTipologia`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le tipologie dei veicoli \r\n';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.tipologia: ~4 rows (circa)
+DELETE FROM `tipologia`;
+INSERT INTO `tipologia` (`IDTipologia`, `Tipo`) VALUES
+	(5, 'autovettura'),
+	(6, 'camper'),
+	(1, 'moto'),
+	(2, 'smartcar');
 
 -- Dump della struttura di tabella db_parcheggio.veicolo
 DROP TABLE IF EXISTS `veicolo`;
@@ -158,7 +181,12 @@ CREATE TABLE IF NOT EXISTS `veicolo` (
   CONSTRAINT `FK_Veicolo_Tipologia` FOREIGN KEY (`IDTipologia`) REFERENCES `tipologia` (`IDTipologia`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='autovetture che hanno parcheggiato almenon una volta in uno o più parcheggi ';
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella db_parcheggio.veicolo: ~3 rows (circa)
+DELETE FROM `veicolo`;
+INSERT INTO `veicolo` (`IDVeicolo`, `Targa`, `AlimentazioneGpl`, `IDTipologia`) VALUES
+	(1, 'ff673cx', 0, 5),
+	(3, 'cb873cx', 1, 5),
+	(4, 'df12679', 0, 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
