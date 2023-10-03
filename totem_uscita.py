@@ -1,4 +1,8 @@
 import time
+
+import mariadb
+import sys
+
 import lettore_ticket as lt
 import autorizzatore_uscita as au
 import sbarra as sb
@@ -8,8 +12,24 @@ class TotemUscita:
     WELCOME="Benvuto, inserisci il tuo ticket "
     BYEBYE= "Arrivederci e grazie! "
     NOT_ALLOWED="Non autorizzato all'uscita "
+
     def __init__(self):
-        pass
+        self.conn=self.get_db_connection()
+
+    def get_db_connection(self):
+        try:
+            return  mariadb.connect(
+                user="root",
+                password="12345678",
+                host="127.0.0.1",
+                port=3308,
+                database="db_parcheggio"
+
+            )
+        except mariadb.Error as e:
+            print(f": {e}")
+            sys.exit(1)
+        
 
     def start(self):
         while True:
