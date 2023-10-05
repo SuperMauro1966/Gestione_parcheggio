@@ -17,10 +17,11 @@
 -- Dump dei dati della tabella db_parcheggio.contiene: ~0 rows (circa)
 DELETE FROM `contiene`;
 
--- Dump dei dati della tabella db_parcheggio.gestore: ~1 rows (circa)
+-- Dump dei dati della tabella db_parcheggio.gestore: ~3 rows (circa)
 DELETE FROM `gestore`;
-INSERT INTO `gestore` (`IDGestore`, `RagioneSociale`, `PartitaIva`) VALUES
-	(1, 'Frassineti2parking', '12334444555');
+INSERT INTO `gestore` (`IDGestore`, `RagioneSociale`, `PartitaIva`, `attivo`) VALUES
+	(1, 'Frassineti2parking', '12334444555', 0),
+	(6, 'Frate4ww', '465677887', 1);
 
 -- Dump dei dati della tabella db_parcheggio.occupa: ~0 rows (circa)
 DELETE FROM `occupa`;
@@ -37,8 +38,12 @@ DELETE FROM `possiede`;
 -- Dump dei dati della tabella db_parcheggio.postiliberi: ~0 rows (circa)
 DELETE FROM `postiliberi`;
 
--- Dump dei dati della tabella db_parcheggio.ticket: ~0 rows (circa)
+-- Dump dei dati della tabella db_parcheggio.ticket: ~3 rows (circa)
 DELETE FROM `ticket`;
+INSERT INTO `ticket` (`IDTicket`, `Importo`, `OrarioEntrata`, `OrarioUscita`, `Ricevuta`, `IDVeicolo`, `IDGestore`) VALUES
+	(1, 0.00, '2023-09-29 12:11:59', NULL, NULL, 1, 1),
+	(2, 0.00, '2023-09-29 12:12:25', NULL, NULL, 3, 1),
+	(3, 0.00, '2023-09-29 12:14:53', NULL, NULL, 4, 1);
 
 -- Dump dei dati della tabella db_parcheggio.tipologia: ~4 rows (circa)
 DELETE FROM `tipologia`;
