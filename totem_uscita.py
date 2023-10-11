@@ -20,9 +20,9 @@ class TotemUscita:
         try:
             return  mariadb.connect(
                 user="root",
-                password="12345678",
                 host="127.0.0.1",
                 port=3306,
+                password="12345678",
                 database="db_parcheggio"
 
             )
@@ -37,8 +37,7 @@ class TotemUscita:
             id_ticket= lt.get_id_ticket()
             if au.e_autorizzato_a_uscire(id_ticket):
                 ds.mostra_messaggio(self.BYEBYE)
-                sb.alzo_sbarra()
-                #aggiornamento posto liberi
+                sb.permetti_uscita()
             else:
                 ds.mostra_messaggio(self.NOT_ALLOWED)
 
