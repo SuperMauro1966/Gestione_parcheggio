@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.6.13-MariaDB - mariadb.org binary distribution
+-- Versione server:              11.3.0-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            12.3.0.6589
 -- --------------------------------------------------------
@@ -50,12 +50,12 @@ CREATE TABLE IF NOT EXISTS `parcheggio` (
 DROP TABLE IF EXISTS `possiede`;
 CREATE TABLE IF NOT EXISTS `possiede` (
   `IDGestore` int(11) NOT NULL,
-  `IDParcehggio` int(11) NOT NULL,
-  PRIMARY KEY (`IDGestore`,`IDParcehggio`) USING BTREE,
-  KEY `IDX_possiede_parcehggio` (`IDParcehggio`) USING BTREE,
+  `IDParcheggio` int(11) NOT NULL,
+  PRIMARY KEY (`IDGestore`,`IDParcheggio`) USING BTREE,
   KEY `IDX_possiede_Gestore` (`IDGestore`) USING BTREE,
+  KEY `IDX_possiede_parcehggio` (`IDParcheggio`) USING BTREE,
   CONSTRAINT `FK_possiede_gestore` FOREIGN KEY (`IDGestore`) REFERENCES `gestore` (`IDGestore`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_possiede_parcehggio` FOREIGN KEY (`IDParcehggio`) REFERENCES `parcheggio` (`IDParcheggio`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_possiede_parcehggio` FOREIGN KEY (`IDParcheggio`) REFERENCES `parcheggio` (`IDParcheggio`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='indica quanti parcheggi possiede il gestore ';
 
 -- L’esportazione dei dati non era selezionata.
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `possiede` (
 DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
   `IDTicket` int(11) NOT NULL AUTO_INCREMENT,
-  `Importo` decimal(10,2) DEFAULT 0.00,
+  `Importo` decimal(10,2) NOT NULL DEFAULT 0.00,
   `OrarioEntrata` datetime NOT NULL,
   `OrarioUscita` datetime DEFAULT NULL,
   `Ricevuta` tinyint(4) DEFAULT NULL,
