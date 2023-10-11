@@ -1,2 +1,2 @@
 def get_id_ticket():
-    return 145789
+    return int(input("inserire ticket"))
