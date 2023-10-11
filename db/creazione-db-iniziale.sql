@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `contiene`;
 CREATE TABLE IF NOT EXISTS `contiene` (
   `IDPostiBase` int(11) NOT NULL,
   `IDParcheggio` int(11) NOT NULL,
-  `PostiTotatli` int(11) NOT NULL,
+  `PostiTotali` int(11) NOT NULL,
   PRIMARY KEY (`IDPostiBase`,`IDParcheggio`),
   KEY `IDX_Contiene_Parcheggio` (`IDParcheggio`) USING BTREE,
   KEY `IDX_Contiene_PostiBase` (`IDPostiBase`) USING BTREE,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `piazzolebase` (
   `TipoPiazzola:` varchar(15) NOT NULL,
   PRIMARY KEY (`IDPostiBase`),
   UNIQUE KEY `IDX_PostiBase_TipoPiazzola:` (`TipoPiazzola:`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='specifica il tipo di piazzola e i posti totali disponibili ';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='specifica il tipo di piazzola e i posti totali disponibili ';
 
 -- L’esportazione dei dati non era selezionata.
 
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   KEY `FK_Tciket_IDGestore` (`IDGestore`) USING BTREE,
   CONSTRAINT `FK_Ticket_IDGestore` FOREIGN KEY (`IDGestore`) REFERENCES `gestore` (`IDGestore`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Ticket_veicolo` FOREIGN KEY (`IDVeicolo`) REFERENCES `veicolo` (`IDVeicolo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le informazioni riguardanti l''importo, gli orari e la rieveuta del veicolo ';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='contiene le informazioni riguardanti l''importo, gli orari e la rieveuta del veicolo ';
 
 -- L’esportazione dei dati non era selezionata.
 
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `veicolo` (
   UNIQUE KEY `IDX_Veicolo_Targa` (`Targa`),
   KEY `FK_Veicolo_Tipologia` (`IDTipologia`),
   CONSTRAINT `FK_Veicolo_Tipologia` FOREIGN KEY (`IDTipologia`) REFERENCES `tipologia` (`IDTipologia`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='autovetture che hanno parcheggiato almenon una volta in uno o più parcheggi ';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='autovetture che hanno parcheggiato almenon una volta in uno o più parcheggi ';
 
 -- L’esportazione dei dati non era selezionata.
 
