@@ -17,6 +17,16 @@
 -- Dump dei dati della tabella db_parcheggio.gestore: ~0 rows (circa)
 DELETE FROM `gestore`;
 
+-- Dump dei dati della tabella db_parcheggio.messaggi: ~6 rows (circa)
+DELETE FROM `messaggi`;
+INSERT INTO `messaggi` (`IDMessaggi`, `Contenuto`, `Attivo`, `Lingua`, `Destinatario`) VALUES
+	(1, 'AUTORIZZATO:ARRIVEDERCI E GRAZIE!', 0, 'ITA', 'TOTEM-USCITA'),
+	(2, 'IMPORTO_NON_PAGATO:NON AUTORIZZATO AD USCIRE PERCHE L\'IMPORTO NON E STATO PAGATO', 0, 'ITA', 'TOTEM-USCITA'),
+	(3, 'TEMPO_MASSIMO_SCADUTO:NON AUTORIZZATO AD USCIRE PERCHE FUORI TEMPO MASSIMO', 0, 'ITA', 'TOTEM-USCITA'),
+	(4, 'NO_ORARIO_USCITA:NON AUTORIZZATO AD USCIRE PERCHE NON C\'E L\'ORARIO D\'USCITA', 0, 'ITA', 'TOTEM-USCITA'),
+	(5, 'TICKET_NON_TROVATO:NON AUTORIZZATO AD USCIRE PERCHE TICKET NON TROVATO', 0, 'ITA', 'TOTEM-USCITA'),
+	(6, 'IMPORTO_NON_PAGATO:NON AUTORIZZATO AD USCIRE PERCHE L\'IMPORTO NON E STATO PAGATO', 0, 'ESP', 'TOTEM-USCITA');
+
 -- Dump dei dati della tabella db_parcheggio.parcheggio: ~0 rows (circa)
 DELETE FROM `parcheggio`;
 
