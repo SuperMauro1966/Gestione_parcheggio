@@ -33,6 +33,20 @@ CREATE TABLE IF NOT EXISTS `gestore` (
 
 -- L’esportazione dei dati non era selezionata.
 
+-- Dump della struttura di tabella db_parcheggio.messaggi
+DROP TABLE IF EXISTS `messaggi`;
+CREATE TABLE IF NOT EXISTS `messaggi` (
+  `IDMessaggi` int(11) NOT NULL AUTO_INCREMENT,
+  `Contenuto` varchar(500) NOT NULL,
+  `Attivo` tinyint(1) NOT NULL DEFAULT 0,
+  `Lingua` varchar(3) NOT NULL,
+  `Destinatario` varchar(50) NOT NULL,
+  PRIMARY KEY (`IDMessaggi`),
+  FULLTEXT KEY `IDX_messaggi_Destinatario` (`Destinatario`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='messagi che compariranno sul display';
+
+-- L’esportazione dei dati non era selezionata.
+
 -- Dump della struttura di tabella db_parcheggio.parcheggio
 DROP TABLE IF EXISTS `parcheggio`;
 CREATE TABLE IF NOT EXISTS `parcheggio` (
