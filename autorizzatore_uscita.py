@@ -3,10 +3,10 @@ from enum import Enum
 
 class AutUscitaStatus(Enum):
    AUTORIZZATO = 1
-   TICKET_NON_TROVATO = 2
-   IMPORTO_NON_PAGATO = 3
+   TICKET_NON_TROVATO = 5
+   IMPORTO_NON_PAGATO = 2
    NO_ORARIO_USCITA = 4
-   TEMPO_MASSIMO_SCADUTO = 5
+   TEMPO_MASSIMO_SCADUTO = 3
 
 def e_autorizzato_a_uscire(id_ticket, conn):
    cursor= conn.cursor()
